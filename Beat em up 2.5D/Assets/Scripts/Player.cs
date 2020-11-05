@@ -19,8 +19,8 @@ public class Player : MonoBehaviour
 
     public float maxSpeed = 4;
     public float jumpForce = 400;
-    public float minHeight;
-    public float maxHeight;
+    public float minHeight = -9;
+    public float maxHeight = 4;
     public float attackRate = 2;
 
     // Start is called before the first frame update
@@ -105,9 +105,11 @@ public class Player : MonoBehaviour
     {
         float minWidth = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 10)).x;
         float maxWidth = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 10)).x;
+        /*
         rb.position = new Vector3(Mathf.Clamp(rb.position.x, minWidth + 1, maxWidth - 1), 
                                   rb.position.y, 
                                   Mathf.Clamp(rb.position.z, minHeight, maxHeight));
+                                  */
     }
 
     public void ZeroSpeed()
