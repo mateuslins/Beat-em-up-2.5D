@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 255425026}
   - component: {fileID: 255425028}
   - component: {fileID: 255425025}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -434,7 +434,8 @@ GameObject:
   m_Component:
   - component: {fileID: 453149411}
   - component: {fileID: 453149412}
-  m_Layer: 0
+  - component: {fileID: 453149413}
+  m_Layer: 10
   m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,11 +464,24 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453149410}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.11247092, y: 0.25083694, z: 0.12487896}
   m_Center: {x: 0.100659825, y: 0.08486517, z: 0.0012567937}
+--- !u!114 &453149413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453149410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a675f3375f6c13a4aade32fe3456faf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &658847989
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +583,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1384056749}
   - component: {fileID: 1384056750}
-  m_Layer: 0
+  - component: {fileID: 1384056751}
+  m_Layer: 12
   m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,11 +613,24 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1384056748}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.11247092, y: 0.25083694, z: 0.12487896}
   m_Center: {x: 0.100659825, y: 0.08486517, z: 0.0012567937}
+--- !u!114 &1384056751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384056748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a675f3375f6c13a4aade32fe3456faf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &1645437203
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,7 +746,7 @@ GameObject:
   - component: {fileID: 2120910230}
   - component: {fileID: 2120910229}
   - component: {fileID: 2120910234}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -855,6 +883,9 @@ MonoBehaviour:
   maxSpeed: 2
   minHeight: -9
   maxHeight: 4
+  damageTime: 0.5
+  attackRate: 1
+  maxHealth: 60
 --- !u!1 &2127554898
 GameObject:
   m_ObjectHideFlags: 0
