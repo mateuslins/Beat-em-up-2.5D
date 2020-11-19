@@ -9,19 +9,28 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private Transform groundCheck;
+    [SerializeField]
+    private HealthBar healthBar;
 
     private bool isGrounded;
     private bool isDead = false;
+    private bool damaged = false;
     private bool facingRight = true;
     private bool jump = false;
     private float speed;
     private float nextAttackTime;
+    private float damageTimer;
+    private int health;
+    private int lives;
 
     public float maxSpeed = 4;
     public float jumpForce = 400;
     public float minHeight = -9;
     public float maxHeight = 4;
     public float attackRate = 2;
+    public float damageTime = 0.5f;
+    public int maxHealth = 60;
+    public int maxLives = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +39,12 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
 
         speed = maxSpeed;
+        health = maxHealth;
+        lives = maxLives;
         isGrounded = true;
+
+        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetText("x" + maxLives.ToString());
     }
 
     // Update is called once per frame
@@ -44,7 +58,7 @@ public class Player : MonoBehaviour
             jump = true;
             isGrounded = false;
         }
-
+        /*
         if (Time.time >= nextAttackTime)
         {
             if (Input.GetKeyDown(KeyCode.X))
@@ -52,8 +66,26 @@ public class Player : MonoBehaviour
                 anim.SetTrigger("Attack");
                 nextAttackTime = Time.time + 1f / attackRate;
             }
+        }*/
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            anim.SetTrigger("Attack");
+            //nextAttackTime = Time.time + 1f / attackRate;
         }
-        
+
+        if (damaged && !isDead)
+        {
+            damageTimer = Time.deltaTime;
+            Debug.Log(damageTimer);
+            Debug.Log(damageTime);
+            if (damageTimer >= damageTime)
+            {
+                damaged = false;
+                damageTime = 0;
+            }
+        }
+        //Debug.Log(damaged);
     }
 
     private void FixedUpdate()
@@ -87,9 +119,9 @@ public class Player : MonoBehaviour
                 jump = false;
                 rb.AddForce(Vector3.up * jumpForce);
             }
-
-            Boundaries();
         }
+
+        Boundaries();
     }
 
     private void Flip()
@@ -120,6 +152,31 @@ public class Player : MonoBehaviour
     public void ResetSpeed()
     {
         speed = maxSpeed;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (lives > 0)
+        {
+            if (!isDead)
+            {
+                health -= damage;
+                healthBar.SetHealth(health);
+                damaged = true;
+                anim.SetTrigger("HitDamage");
+
+                if (health <= 0)
+                {
+                    health = maxHealth;
+                    lives -= 1;
+                    healthBar.SetText("x" + lives.ToString());
+                }
+            }
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

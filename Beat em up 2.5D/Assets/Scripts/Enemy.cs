@@ -124,7 +124,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TookDamage(int damage)
+    public void TakeDamage(int damage)
     {
         if (!isDead)
         {
