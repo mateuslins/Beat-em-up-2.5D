@@ -77,8 +77,6 @@ public class Player : MonoBehaviour
         if (damaged && !isDead)
         {
             damageTimer = Time.deltaTime;
-            Debug.Log(damageTimer);
-            Debug.Log(damageTime);
             if (damageTimer >= damageTime)
             {
                 damaged = false;

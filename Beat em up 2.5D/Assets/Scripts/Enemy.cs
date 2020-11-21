@@ -6,11 +6,10 @@ public class Enemy : MonoBehaviour
 {
     private Rigidbody rb;
     private Animator anim;
+    private Transform player;
 
     [SerializeField]
     private Transform groundCheck;
-    [SerializeField]
-    private Transform player;
 
     private bool isGrounded;
     private bool isDead = false;
@@ -39,6 +38,8 @@ public class Enemy : MonoBehaviour
         speed = maxSpeed;
         health = maxHealth;
         isGrounded = true;
+
+        player = FindObjectOfType<Player>().transform;
     }
 
     // Update is called once per frame
@@ -135,6 +136,7 @@ public class Enemy : MonoBehaviour
             if (health <= 0)
             {
                 isDead = true;
+                Debug.Log(facingRight);
                 rb.AddRelativeForce(new Vector3(-3, 5, 0), ForceMode.Impulse);
                 anim.SetFloat("Speed", 0f);
             }
@@ -144,6 +146,7 @@ public class Enemy : MonoBehaviour
     public void DisableEnemy()
     {
         gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     private void Boundaries()
